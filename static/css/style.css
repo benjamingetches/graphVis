@@ -1,0 +1,245 @@
+:root {
+    --bg-dark: #1a1a1a;
+    --bg-sidebar: #242424;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --accent: #4CAF50;
+    --accent-hover: #45a049;
+    --border: #333333;
+    --node-border: #ffffff;
+    --error: #ff4444;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 350px; /*  from 300px */
+    padding: 15px;
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+    height: 100vh;
+    overflow-y: auto; /* Add scrolling */
+}
+
+.graph-container {
+    flex: 1;
+    padding: 20px;
+    position: relative;
+}
+.algorithm-display {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    max-width: 300px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 8px;
+    padding: 15px;
+    z-index: 100;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.algorithm-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--text-primary);
+    font-size: 0.9em;
+}
+
+.algorithm-table th,
+.algorithm-table td {
+    padding: 4px 6px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+.algorithm-table th {
+    font-weight: bold;
+    color: var(--accent);
+}
+canvas {
+    background: var(--bg-dark);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.controls button, .algorithms button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-size: 14px;
+    width: 100%;
+    margin: 8px 0;
+}
+
+.controls button:hover, .algorithms button:hover {
+    background: var(--accent-hover);
+}
+.weight-modal {
+    position: fixed;
+    background: var(--bg-sidebar);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px;
+    display: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.weight-modal input {
+    width: 60px;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 4px 8px;
+    margin-right: 8px;
+}
+
+.weight-modal button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+}
+
+.weight-modal button:hover {
+    background: var(--accent-hover);
+}
+
+.edge-controls {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+.edge-controls {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+h2, h3 {
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+.edge-controls input, .algorithms select {
+    width: calc(100% - 16px);
+    padding: 8px 12px;
+    margin: 4px 0;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    font-size: 14px;
+}
+.algorithms input,
+.source-select input {
+    width: calc(100% - 16px);
+    margin: 4px 0;
+}
+.mode-toggle {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.mode-button {
+    flex: 1;
+    background: var(--bg-dark) !important;
+    border: 1px solid var(--border) !important;
+}
+
+.mode-button.active {
+    background: var(--accent) !important;
+    border-color: var(--accent) !important;
+}
+.error-message {
+    color: var(--error);
+    background: rgba(255, 68, 68, 0.1);
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* New styles for source node selection */
+.source-select {
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+.algorithm-table .current-node {
+    background: rgba(255, 193, 7, 0.2); /* Highlight current node */
+}
+
+.queue-display {
+    padding: 10px !important;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.queue-item {
+    display: inline-block;
+    padding: 2px 8px;
+    background: var(--accent);
+    border-radius: 4px;
+    margin: 0 2px;
+}
+
+/* Arrow between queue items */
+.queue-item:not(:last-child)::after {
+    content: '→';
+    margin-left: 8px;
+    color: var(--text-secondary);
+}
+.color-key {
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+}
+
+.color-key-title {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.color-key-item {
+    display: flex;
+    align-items: center;
+    margin: 4px 0;
+}
+
+.color-swatch {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    margin-right: 8px;
+}
+
+.current-node {
+    background: rgba(255, 193, 7, 0.2);
+}

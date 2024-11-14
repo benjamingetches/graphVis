@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Visualization</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Graph Controls</h2>
+            <div class="controls">
+                <div class="mode-toggle">
+                    <button id="moveMode" class="mode-button active">Move Mode</button>
+                    <button id="edgeMode" class="mode-button">Edge Mode</button>
+                </div>
+                <button id="addNode">Add Node</button>
+                
+                <!-- Updated edge creation controls -->
+                <div class="edge-controls">
+                    <h3>Add Edge</h3>
+                    <input type="number" id="sourceNode" placeholder="Source Node ID" min="0">
+                    <input type="number" id="targetNode" placeholder="Target Node ID" min="0">
+                    <input type="number" id="edgeWeight" placeholder="Weight" min="1" value="1">
+                    <button id="addEdge">Add Edge</button>
+                </div>
+
+                <button id="clear">Clear Graph</button>
+            </div>
+            <div class="algorithms">
+                <h3>Algorithms</h3>
+                <div class="source-select">
+                    <h3>Source Node</h3>
+                    <input type="number" id="sourceNodeAlgo" placeholder="Start Node ID" min="0">
+                </div>
+                <select id="algorithm">
+                    <option value="bfs">BFS</option>
+                    <option value="dfs">DFS</option>
+                    <option value="dijkstra">Dijkstra's</option>
+                    <option value="mst">Minimum Spanning Tree</option>
+                </select>
+                <button id="runAlgorithm">Run Algorithm</button>
+                <div id="algorithmError" class="error-message"></div>
+            </div>
+        </div>
+        <div class="graph-container">
+            <canvas id="graphCanvas"></canvas>
+        </div>
+    </div>
+    <div id="weightModal" class="weight-modal">
+        <input type="number" id="weightInput" min="1">
+        <button id="saveWeight">Save</button>
+    </div>
+    <script src="{{ url_for('static', filename='js/graph.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/algorithms.js') }}"></script>
+</body>
+</html>
